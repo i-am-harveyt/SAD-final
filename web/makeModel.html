@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Make Model</title>
+	<link rel="stylesheet" href="style/makeProduct.css" />
+	<!-- 將樣式放入獨立的CSS文件 -->
+	<!-- 引入 qrcode.js -->
+	<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Make Model</h1>
+
+		<form id="modelForm">
+			<label for="categories">Choose a Category:</label>
+			<select id="categories" name="categories"></select>
+			<label for="name">Model Name:</label>
+			<input id="name" name="name"></input>
+			<button type="button" onclick="submitForm()">Submit</button>
+		</form>
+	</div>
+
+	<script src="./script/makeModel.js"></script>
+	<script>
+      // 這裡放入你之前的 JavaScript 代碼
+	</script>
+</body>
+
+</html>

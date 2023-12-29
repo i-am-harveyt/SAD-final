@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Product Form</title>
+	<link rel="stylesheet" href="style/makeProduct.css" />
+	<!-- 引入 qrcode.js -->
+	<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Fetch and QR Code</h1>
+
+		<form id="modelForm">
+			<label for="models">Choose a Model:</label>
+			<select id="models" name="models"></select>
+			<button type="button" onclick="submitForm()">Submit</button>
+		</form>
+
+		<div class="qrcode-container">
+			<div id="qrcode"></div>
+			<span id="label"></span>
+		</div>
+	</div>
+
+	<script src="./script/makeProduct.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Generate QRcode for Register</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link href="style/decode.css" rel="stylesheet" />
+	<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+</head>
+
+<body>
+	<div class="qrcode-container">
+		<div id="qrcode"></div>
+		<span id="label"></span>
+	</div>
+
+	<script>
+		const urlParams = new URLSearchParams(window.location.search);
+		const data = JSON.parse(urlParams.get("data"));
+		console.log(data);
+		let dataString =
+			`http://localhost:5500/register.html` +
+			`?productID=${data.product.id}` +
+			`&secret=${data.product.secret}` +
+			`&model=${data.model.id}` +
+			`&shopID=${data.shop.id}` +
+			`&machineID=${data.machine.id}`;
+
+		// 在指定的元素中生成 QR code
+		document.getElementById("qrcode").innerHTML = "";
+		new QRCode(document.getElementById("qrcode"), {
+			text: dataString,
+			correctLevel: 3,
+			width: 300,
+			height: 300,
+		});
+		document.getElementById("label").innerHTML = dataString;
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Register</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 20px;
+		}
+
+		h1 {
+			text-align: center;
+		}
+
+		form {
+			max-width: 400px;
+			margin: 20px auto;
+			padding: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		label {
+			display: block;
+			margin-bottom: 8px;
+		}
+
+		input {
+			width: 100%;
+			padding: 8px;
+			margin-bottom: 16px;
+			box-sizing: border-box;
+		}
+
+		button {
+			background-color: #4caf50;
+			color: white;
+			padding: 10px 15px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #45a049;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>表格網站</h1>
+
+	<form id="register_form">
+		<label for="memberName">會員名稱:</label>
+		<input type="text" id="memberName" name="memberName" required />
+
+		<label for="secret">Product ID:</label>
+		<input type="text" id="productID" name="productID" readonly />
+
+		<label for="secret">Secret:</label>
+		<input type="text" id="secret" name="secret" readonly />
+
+		<label for="shopID">Store ID:</label>
+		<input type="text" id="shopID" name="shopID" readonly />
+
+		<label for="machineID">Machine ID:</label>
+		<input type="text" id="machineID" name="machineID" readonly />
+
+		<button type="button" onclick="submitForm()">提交</button>
+	</form>
+
+	<script>
+		const urlParams = new URLSearchParams(window.location.search);
+
+		document.getElementById("productID").value = urlParams.get("productID");
+		document.getElementById("secret").value = urlParams.get("secret");
+		document.getElementById("model").value = urlParams.get("model");
+		document.getElementById("shopID").value = urlParams.get("shopID");
+		document.getElementById("machineID").value = urlParams.get("machineID");
+
+		function submitForm() {
+			const form = document.getElementById("register_form");
+			const formData = new FormData(form);
+
+			fetch("http://localhost:8080/api/v0.1/register", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(Object.fromEntries(formData.entries())),
+			})
+				.then((response) => {
+					if (!response.ok) {
+						throw new Error("Network response was not ok");
+					}
+					return response.json();
+				})
+				.then((data) => {
+					alert("Succeed");
+					console.log("Success:", data);
+					// 在這裡可以處理成功後的邏輯
+				})
+				.catch((error) => {
+					alert("Failed");
+					console.error("Error:", error);
+					// 在這裡可以處理錯誤時的邏輯
+				});
+		}
+	</script>
+</body>
+
+</html>
